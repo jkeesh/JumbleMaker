@@ -15,21 +15,33 @@ function LetterContainer(options){
     this.letters = [];
 
     this.letter_dropped = function(e, ui){
-        D.log("Letter brough back");
-
         var letter_elem = $(ui.draggable);
-        D.log(letter_elem);
+        var letter = Utils.get_letter(letter_elem);
+        var container_id = letter_elem.data('container');
+        var container = Utils.get_container(container_id);
+        container.remove_letter(letter);
     }
 
     this.setup = function(){
         $('.letter').draggable(); 
         $('#letter_container').droppable({
             drop: self.letter_dropped,
-            hoverClass: 'droppable'
+            hoverClass: 'droppable',
+            disabled: false 
         });
     }
 
 
     this.setup();
     D.log(this);
+}
+
+var Utils = {};
+Utils.get_letter = function(elem){
+    return $.trim($(elem).html());
+}
+
+Utils.all_containers = {};
+Utils.get_container = function(sel){
+    return Utils.all_containers[sel];
 }
