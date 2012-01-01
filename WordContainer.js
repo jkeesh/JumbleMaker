@@ -11,6 +11,21 @@ function WordContainer(options){
     this.id = options.id; 
     this.letters = [];
     this.size = options.size;
+    this.word = null;
+
+    this.set_word = function(word){
+        this.word = word;
+    }
+
+    this.reset_word = function(){
+        this.word = null;
+    }
+
+
+    this.get_info = function(){
+        var letters = this.get_letters();
+        return letters + ":" + this.word;
+    }
 
     this.setup = function(){
         this.letter_drop = $('.letter_holder', this.id); 
@@ -35,9 +50,7 @@ function WordContainer(options){
      * this word container.
      */
     this.update = function(){
-        D.log("update");
         if(this.letters.length == 0){
-            D.log("empty");
             var word_list = $('.word_list', self.id);
             word_list.html('');
             return; 
@@ -53,7 +66,6 @@ function WordContainer(options){
             type: 'GET',
             success: function(result){
                 var result_arr = result.split('\n');
-                D.log(result_arr);
                 
                 var html = '';
                 for(var i = 0; i < result_arr.length; i++){
@@ -61,7 +73,6 @@ function WordContainer(options){
                 }
                 var word_list = $('.word_list', self.id);
                 word_list.html(html);
-                //word_list.html(result);
             }
         });
         D.log(this);

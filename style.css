@@ -84,3 +84,21 @@ body{
 .word_container .w:hover{
     background-color: #eee;
 }
+
+.word_container .w.selected{
+    background-color: #ccc;
+}
+
+#generate{
+    position: fixed;
+    top: 10px;
+    right: 21px;
+    font-weight: bold;
+    background-color: white;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#generate:hover{
+    background-color: #ccc;
+}

@@ -54,6 +54,7 @@ $cleaned = strtoupper($cleaned);
     </head>
 
     <body>
+        <div id="generate">Done!</div>
         <div id="container">
             <div id="letter_container">
                 <?php 
@@ -69,22 +70,30 @@ $cleaned = strtoupper($cleaned);
 
             <div id="bottom_container">
                 <div id="container1" class="word_container">
-                    <div class="title">5 letter</div> 
+                    <div class="title">5 letter
+                        <span class="chosen_word"></span>
+                    </div> 
                     <div class="letter_holder"></div>
                     <div class="word_list"></div>
                 </div>
                 <div id="container2" class="word_container">
-                    <div class="title">5 letter</div> 
+                    <div class="title">5 letter
+                        <span class="chosen_word"></span>
+                    </div> 
                     <div class="letter_holder"></div>
                     <div class="word_list"></div>
                 </div>
                 <div id="container3" class="word_container">
-                    <div class="title">6 letter</div> 
+                    <div class="title">6 letter
+                        <span class="chosen_word"></span>
+                    </div> 
                     <div class="letter_holder"></div>
                     <div class="word_list"></div>
                 </div>
                 <div id="container4" class="word_container">
-                    <div class="title">6 letter</div> 
+                    <div class="title">6 letter
+                        <span class="chosen_word"></span>
+                    </div> 
                     <div class="letter_holder"></div>
                     <div class="word_list"></div>
                 </div>

@@ -58,6 +58,9 @@ function LetterContainer(options){
             hoverClass: 'droppable',
             disabled: false 
         });
+
+        Utils.highlight_words();
+        Utils.setup_link();
     }
 
 
@@ -74,3 +77,41 @@ Utils.all_containers = {};
 Utils.get_container = function(sel){
     return Utils.all_containers[sel];
 }
+
+
+Utils.setup_link = function(){
+    $('#generate').click(function(){
+        window.location.href = 'generate.php?info='+Utils.generate_info();     
+    });
+}
+
+Utils.generate_info = function(){
+    var info = new Array();
+    for(var selector in Utils.all_containers){
+        var container = Utils.all_containers[selector];
+        info.push(container.get_info());
+    }
+    return info.join(',');
+}
+
+Utils.highlight_words = function(){
+    $('.word_list .w').live('click', function(){
+        var container = $(this).parent().parent();
+        var id = $(container).attr('id');
+        var container_obj = Utils.get_container('#' + id);
+        container_obj.set_word($(this).html());
+        Utils.unselect_for_container(container);
+        $('.chosen_word', container).html($(this).html());            
+        $(this).addClass('selected');     
+    });
+
+   
+}
+
+
+Utils.unselect_for_container = function(container){
+    $('.word_list .w.selected', container).removeClass('selected');    
+    $('.chosen_word', container).html('');
+}
+
+
