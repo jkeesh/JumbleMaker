@@ -10,6 +10,7 @@ function WordContainer(options){
 
     this.id = options.id; 
     this.letters = [];
+    this.size = options.size;
 
     this.setup = function(){
         this.letter_drop = $('.letter_holder', this.id); 
@@ -19,45 +20,61 @@ function WordContainer(options){
         });
     }
 
+
+    this.get_letters = function(){
+        var result = "";
+        for(var i = 0; i < this.letters.length; i++){
+            result += this.letters[i].letter;
+        }
+        return result;
+    }
+
     /* 
      * Make a call to the server to update the 
      * wordlist based on the current letters in 
      * this word container.
      */
     this.update = function(){
-        D.log("UPDATE"); 
-        var letters = self.letters.join(',');
-        D.log(letters);
+        D.log("update");
+        if(this.letters.length == 0){
+            D.log("empty");
+            var word_list = $('.word_list', self.id);
+            word_list.html('');
+            return; 
+        }
+        var letters = this.get_letters(); 
+        D.log("Letters: " + letters); 
         $.ajax({
             url: 'get_words.php',
             data: {
-                letters: letters 
+                letters: letters, 
+                size: self.size
             },
             type: 'GET',
-            dataType: 'JSON',
             success: function(result){
-                D.log(result);
+                var word_list = $('.word_list', self.id);
+                word_list.html(result);
             }
         });
+        D.log(this);
     }
 
     this.letter_dropped = function(e, ui){
         var elem = ui.draggable;
-        $(elem).data('container', self.id);
-        var letter = Utils.get_letter(elem);
-        self.add_letter(letter);
+        var letter = LetterContainer.get_by_elem(elem);
+        letter.container = self;
+        self.add_letter(letter); 
     }
 
     this.add_letter = function(letter){
         this.letters.push(letter);    
-        D.log(this);
         this.update();
     }
 
-    this.remove_letter = function(letter){
+    this.remove_letter = function(id){
         for(var i = 0; i < this.letters.length; i++){
             var cur = this.letters[i];
-            if(cur == letter){
+            if(cur.id == id){
                 this.letters.splice(i, 1);
                 break;
             }

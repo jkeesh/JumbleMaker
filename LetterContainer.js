@@ -2,6 +2,13 @@ window.D = window.console;
 
 D.log('test');
 
+function Letter(options){
+    this.id = options.id;
+    this.letter = options.letter;
+    this.container; // initially undefined
+}
+
+
 /*
  * Construct a new LetterContainer, which holds the main
  * letters for the final word.
@@ -14,18 +21,40 @@ function LetterContainer(options){
     this.word = options.word;
     this.letters = [];
 
-    this.letter_dropped = function(e, ui){
-        var letter_elem = $(ui.draggable);
-        var letter = Utils.get_letter(letter_elem);
-        var container_id = letter_elem.data('container');
-        var container = Utils.get_container(container_id);
-        container.remove_letter(letter);
+    this.get_by_index = function(idx){
+        return this.letters[idx];
+    }
+
+    this.get_by_elem = function(elem){
+        var idx = $(elem).attr('data-id');
+        return this.get_by_index(idx);
+    }
+
+    this.reset_letter = function(e, ui){
+        var letter_elem = $(this);
+        var letter = self.get_by_elem(letter_elem);
+        if(letter.container == undefined){
+            D.log("Container undefined");
+            return;
+        }
+
+        letter.container.remove_letter(letter.id);
+        letter.container = undefined;
+        D.log(letter);
     }
 
     this.setup = function(){
-        $('.letter').draggable(); 
+        $('.letter').each(function(idx, elem){
+            self.letters.push(new Letter({
+                id: idx,
+                letter: Utils.get_letter(elem) 
+            }));    
+        });
+
+        $('.letter').draggable({
+            drag: self.reset_letter
+        }); 
         $('#letter_container').droppable({
-            drop: self.letter_dropped,
             hoverClass: 'droppable',
             disabled: false 
         });

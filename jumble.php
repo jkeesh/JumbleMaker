@@ -25,22 +25,26 @@ $cleaned = strtoupper($cleaned);
 
     <script type="text/javascript">
     $(document).ready(function(){
-        new LetterContainer({
+        LetterContainer = new LetterContainer({
             word: '<?php echo $cleaned; ?>'
         });
 
 
         new WordContainer({
-            id: '#container1'
+            id: '#container1',
+            size: 5
         });
         new WordContainer({
-            id: '#container2'
+            id: '#container2',
+            size: 5
         });
         new WordContainer({
-            id: '#container3'
+            id: '#container3',
+            size: 6
         });
         new WordContainer({
-            id: '#container4'
+            id: '#container4',
+            size: 6
         });
     });
     </script>
@@ -56,7 +60,7 @@ $cleaned = strtoupper($cleaned);
 
                 for($i = 0; $i < strlen($cleaned); $i++){
                 ?>
-                    <span class="letter">
+                    <span class="letter" data-id="<?php echo $i; ?>">
                     <?php echo $cleaned[$i]; ?> 
                     </span>
                 <?php
