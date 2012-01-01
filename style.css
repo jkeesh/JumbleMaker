@@ -72,3 +72,15 @@ body{
 .clear{
     clear: both;
 }
+
+
+.word_container .w{
+    font-size: 13px;
+    padding: 3px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.word_container .w:hover{
+    background-color: #eee;
+}

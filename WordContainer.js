@@ -52,8 +52,16 @@ function WordContainer(options){
             },
             type: 'GET',
             success: function(result){
+                var result_arr = result.split('\n');
+                D.log(result_arr);
+                
+                var html = '';
+                for(var i = 0; i < result_arr.length; i++){
+                    html += '<div class="w">'+result_arr[i]+'</div>';
+                }
                 var word_list = $('.word_list', self.id);
-                word_list.html(result);
+                word_list.html(html);
+                //word_list.html(result);
             }
         });
         D.log(this);
