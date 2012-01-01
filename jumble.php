@@ -89,6 +89,8 @@ $cleaned = strtoupper($cleaned);
                     <div class="word_list"></div>
                 </div>
             </div>
+
+            <div class="clear"></div>
         </div>
     </body>
 </html>
