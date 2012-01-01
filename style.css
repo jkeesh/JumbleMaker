@@ -1,3 +1,67 @@
+body{
+    margin: 0;
+    padding: 0;
+}
 .letter{
     font-size: 38px;
+    padding: 10px;
+    background-color: #ccc;
+    border: 1px solid black;
+    margin: 10px;
+    cursor: pointer;
+    width: 44px;
+    display: inline-block;
+}
+
+.letter:hover{
+    background-color: #eee;
+}
+
+#letter_container{
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    height: 100px;
+    background-color: #ddd;
+}
+
+#bottom_container{
+    height: 100%;
+    background-color: #eee;
+}
+
+#container{
+    overflow: hidden;
+    height: 100%;
+}
+
+.word_container{
+    width: 22.8%; 
+    float: left;
+    border: 1px solid black;
+    margin: 0 0.7%;
+    padding: 0.3%;
+}
+
+.word_container .title{
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.word_container .letter_holder{
+    height: 80px;
+    background-color: #888;
+}
+
+.word_list{
+    background-color: white;
+    height: 100%;
+}
+
+
+.letter_holder.droppable{
+    border: 2px solid black;
+}
+#letter_container.droppable{
+    background-color: white;
 }
