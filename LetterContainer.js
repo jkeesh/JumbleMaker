@@ -20,6 +20,7 @@ function LetterContainer(options){
 
     this.word = options.word;
     this.letters = [];
+    this.full = options.full;
 
     this.get_by_index = function(idx){
         return this.letters[idx];
@@ -61,6 +62,7 @@ function LetterContainer(options){
 
         Utils.highlight_words();
         Utils.setup_link();
+        Utils.full_word = this.full;
     }
 
 
@@ -81,7 +83,7 @@ Utils.get_container = function(sel){
 
 Utils.setup_link = function(){
     $('#generate').click(function(){
-        window.location.href = 'generate.php?info='+Utils.generate_info();     
+        window.location.href = 'generate.php?full='+ Utils.full_word +'&info='+Utils.generate_info();     
     });
 }
 

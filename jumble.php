@@ -26,7 +26,8 @@ $cleaned = strtoupper($cleaned);
     <script type="text/javascript">
     $(document).ready(function(){
         LetterContainer = new LetterContainer({
-            word: '<?php echo $cleaned; ?>'
+            word: '<?php echo $cleaned; ?>',
+            full: '<?php echo $answer; ?>'
         });
 
 
