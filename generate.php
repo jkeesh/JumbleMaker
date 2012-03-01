@@ -47,13 +47,21 @@ function get_mask($word, $letters){
 
     // fill with 0s
     $mask = array_fill(0, strlen($word), 0);
-    
+   
+ 
     foreach($arr as $letter){
         $count = substr_count($word, $letter);
-        $occurence = rand(1, $count);
-        $idx = get_nth_occurence($word, $letter, $occurence);
-        // Choose this index to set a circle in
-        $mask[$idx] = 1;
+        while(true){
+          $occurence = rand(1, $count);
+          $idx = get_nth_occurence($word, $letter, $occurence);
+          
+          // Make sure we have not set this location yet 
+          if($mask[$idx] == 0){
+            // Choose this index to set a circle in
+            $mask[$idx] = 1;
+            break;
+          } 
+        }
     }
     return $mask;
 }
